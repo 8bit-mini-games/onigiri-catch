@@ -2,19 +2,21 @@
 <html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>おにぎりキャッチ</title>
+<link rel="canonical" href="https://8bit-mini-games.github.io/onigiri-catch/">
 <meta name="description" content="45秒で何点取れる？ねこ・くま・うさぎを選んで、おにぎりをキャッチする無料ミニゲーム。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="おにぎりキャッチ">
 <meta property="og:title" content="おにぎりキャッチ｜45秒の無料ミニゲーム">
 <meta property="og:description" content="ねこ・くま・うさぎで挑戦！45秒で何点取れる？">
 <meta property="og:url" content="https://8bit-mini-games.github.io/onigiri-catch/">
-<meta property="og:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png?v=20261029">
+<meta property="og:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="おにぎりキャッチ。ねこ、くま、うさぎを選んで遊ぶ45秒のミニゲーム。">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="おにぎりキャッチ｜45秒の無料ミニゲーム">
 <meta name="twitter:description" content="ねこ・くま・うさぎで挑戦！45秒で何点取れる？">
-<meta name="twitter:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png?v=20261029">
+<meta name="twitter:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png">
 <meta name="twitter:image:alt" content="おにぎりキャッチ。ねこ、くま、うさぎを選んで遊ぶ45秒のミニゲーム。">
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 <style>
@@ -75,8 +77,8 @@ button {font-size:17px;line-height:1.5;}
 <div class="scoreboard"><div class="stat"><span class="caption">得点</span><span class="value" id="sc"><span class="num">0</span><small>点</small></span></div><div class="stat"><span class="caption">残り</span><span class="value" id="tm" aria-label="残り45秒"><span class="num">45</span><small>秒</small></span></div><div class="stat"><span class="caption">ベスト</span><span class="value" id="bs"><span class="num">0</span></span></div></div>
 <div class="status-row"><span class="hearts" id="lf" aria-label="ライフ3、最大5"></span></div>
 <div class="stage"><canvas id="c" tabindex="0" aria-label="おにぎりキャッチ。指で左右にドラッグ、または左右の矢印キーで移動"></canvas><div class="fx" id="fx" aria-hidden="true"></div><div class="tracked feedback-hud" id="feedback" hidden aria-hidden="true"></div><div class="tracked power-hud" id="powerHud" hidden aria-hidden="true"><span id="powerText">★ 5秒</span><div class="power-bar"><span id="powerFill"></span></div></div>
-<div class="ov" id="ov"><p id="msg">空からごちそうが降ってくる！<br>キャラをえらんで遊ぼう。</p><p class="small" id="sub">45秒で何点取れるかな？<br>★は2個。取ると5秒間無敵！</p><div class="chs" id="chs"></div><button id="go" type="button">あそぶ</button><button class="secondary" id="again" type="button" hidden>最初からやり直す</button><button class="secondary" id="shareX" type="button" hidden>Xで共有する</button></div></div>
-<p class="privacy-note">登録不要・ダウンロード不要<br>名前・メールアドレスの入力も不要です</p>
+<div class="ov" id="ov"><p id="msg">空からごちそうが降ってくる！<br>キャラをえらんで遊ぼう。</p><p class="small" id="sub">45秒で何点取れるかな？<br>★は2個。取ると5秒間無敵！</p><div class="chs" id="chs"></div><button id="go" type="button">あそぶ</button><p class="privacy-note" id="privacyNote">登録・ダウンロード不要｜無料で遊べます</p><button class="secondary" id="again" type="button" hidden>最初からやり直す</button><button class="secondary" id="shareX" type="button" hidden>Xで共有する</button></div></div>
+
 <section class="rules" id="rules" aria-label="あそび方"><strong>あそび方</strong><p>左右にドラッグ／← →で移動。<br>おにぎり1点・だんご2点・★5点。<br>キノコ・爆弾はよけて、♥で回復。<br>★で5秒無敵！はじけば各＋2点。<br>連続キャッチで得点アップ！</p></section></main>
 <script>
 'use strict';
@@ -301,17 +303,17 @@ function releaseInput(){keys.l=keys.r=0;if(activePointer!==null){try{C.releasePo
 function start(){
  if(st==='play')return;cancelAnimationFrame(raf);stopVoices();au();releaseInput();clearLabels();
  score=0;life=3;combo=0;maxC=0;feedbackUntil=0;feedbackText="";items=[];sp=0;px=tx=51;flash=shake=0;elapsed=0;starTime=0;hurtTime=0;starWarned=false;starIndex=0;knocked=[];sparks=[];normalStep=0;powerStep=0;
- st='play';$('shareX').hidden=true;$('rules').hidden=true;$('ov').hidden=true;$('pause').hidden=false;hud();draw();last=performance.now();music();raf=requestAnimationFrame(loop);C.focus({preventScroll:true});
+ st='play';$('privacyNote').hidden=true;$('shareX').hidden=true;$('rules').hidden=true;$('ov').hidden=true;$('pause').hidden=false;hud();draw();last=performance.now();music();raf=requestAnimationFrame(loop);C.focus({preventScroll:true});
 }
 function finish(reason){
- if(st!=='play')return;st='over';feedbackText='';$('feedback').hidden=true;$('powerHud').hidden=true;$('rules').hidden=false;cancelAnimationFrame(raf);releaseInput();stopVoices();starTime=0;hurtTime=0;knocked=[];sparks=[];clearLabels();
+ if(st!=='play')return;st='over';$('privacyNote').hidden=true;feedbackText='';$('feedback').hidden=true;$('powerHud').hidden=true;$('rules').hidden=false;cancelAnimationFrame(raf);releaseInput();stopVoices();starTime=0;hurtTime=0;knocked=[];sparks=[];clearLabels();
  const newBest=score>best;if(newBest){best=score;try{localStorage.setItem(BEST_KEY,String(best))}catch{}}
  if(reason==='time')SFX.timeup();else SFX.over();hud();
  $('msg').innerHTML=(reason==='time'?'タイムアップ！':'ゲームオーバー')+'<strong class="result-score"><span class="num">'+score+'</span>点</strong>最大 <span class="num">'+maxC+'</span>連続'+(newBest?'<br><span class="record">ベスト更新！</span>':'');
  $('shareX').hidden=false;$('sub').textContent='キャラをえらんで、もう一回！';$('sub').hidden=false;$('chs').hidden=false;$('again').hidden=true;$('pause').hidden=true;$('go').textContent='もういちど';$('ov').hidden=false;draw();$('go').focus({preventScroll:true});
 }
 function pauseGame(){
- if(st!=='play')return;st='pause';$('feedback').hidden=true;$('powerHud').hidden=true;$('rules').hidden=false;cancelAnimationFrame(raf);releaseInput();stopVoices();$('pause').hidden=true;
+ if(st!=='play')return;st='pause';$('privacyNote').hidden=true;$('feedback').hidden=true;$('powerHud').hidden=true;$('rules').hidden=false;cancelAnimationFrame(raf);releaseInput();stopVoices();$('pause').hidden=true;
  $('msg').innerHTML='ひとやすみ<br>残り '+Math.max(0,Math.ceil(ROUND-elapsed))+'秒';$('sub').textContent='残り時間と無敵時間は、そのままです。';$('sub').hidden=false;$('chs').hidden=true;$('again').hidden=false;$('go').textContent='つづける';$('ov').hidden=false;draw();
 }
 function resume(){if(st!=='pause')return;au();releaseInput();st='play';$('rules').hidden=true;$('ov').hidden=true;$('pause').hidden=false;last=performance.now();music();raf=requestAnimationFrame(loop);C.focus({preventScroll:true})}
@@ -343,12 +345,12 @@ for(const name of ['pointerup','pointercancel','lostpointercapture'])C.addEventL
 addEventListener('keydown',e=>{if(e.repeat&&(e.key===' '||e.key==='Enter'||e.key==='Escape'))return;if(st==='play'){if(e.key==='ArrowLeft'||e.key==='a')keys.l=1;if(e.key==='ArrowRight'||e.key==='d')keys.r=1;if(e.key.startsWith('Arrow'))e.preventDefault();if(e.key==='Escape'){e.preventDefault();pauseGame()}}else if((e.key===' '||e.key==='Enter')&&document.activeElement.tagName!=='BUTTON'){e.preventDefault();if(st==='pause')resume();else start()}});
 addEventListener('keyup',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.l=0;if(e.key==='ArrowRight'||e.key==='d')keys.r=0});addEventListener('blur',pauseGame);document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseGame()});
 $('shareX').onclick=()=>{
- const msg='おにぎりキャッチで'+score+'点！ 🍙 あなたも挑戦してみて！';
- const configured='https://8bit-mini-games.github.io/onigiri-catch/';
- const url=configured.startsWith('https://')?configured:(location.hostname.endsWith('.github.io')?location.origin+location.pathname.replace(/(?:index\.html)?$/,''):'');
- if(!url){alert('X共有は公開サイトから利用できます。公開後にお試しください。');return;}
- const share='https://twitter.com/intent/tweet?text='+encodeURIComponent(msg)+'&url='+encodeURIComponent(url);
- window.open(share,'_blank','noopener,noreferrer');
+  const configured='https://8bit-mini-games.github.io/onigiri-catch/';
+  const url=configured.startsWith('https://')?configured:(location.hostname.endsWith('.github.io')?location.origin+location.pathname.replace(/(?:index\.html)?$/,''):'');
+  if(!url){alert('X共有は公開サイトから利用できます。公開後にお試しください。');return;}
+  const msg='おにぎりキャッチで'+score+'点！🍙\n\n45秒の無料ミニゲーム。\n登録・ダウンロード不要！\n\nあなたも挑戦してみて！\n\n'+url;
+  const share='https://twitter.com/intent/tweet?text='+encodeURIComponent(msg);
+  window.open(share,'_blank','noopener,noreferrer');
 };
 $('go').onclick=()=>st==='pause'?resume():start();$('again').onclick=start;$('pause').onclick=pauseGame;
 $('mu').onclick=()=>{mute=!mute;$('mu').textContent=mute?'🔇':'🔊';$('mu').setAttribute('aria-pressed',String(!mute));$('mu').setAttribute('aria-label',mute?'音楽・効果音をオンにする':'音楽・効果音をオフにする');stopVoices();if(!mute){au();music()}};

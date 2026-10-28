@@ -8,12 +8,13 @@
 <meta property="og:title" content="おにぎりキャッチ｜45秒の無料ミニゲーム">
 <meta property="og:description" content="ねこ・くま・うさぎで挑戦！45秒で何点取れる？">
 <meta property="og:url" content="https://8bit-mini-games.github.io/onigiri-catch/">
-<meta property="og:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png">
+<meta property="og:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png?v=20261029">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="おにぎりキャッチ｜45秒の無料ミニゲーム">
 <meta name="twitter:description" content="ねこ・くま・うさぎで挑戦！45秒で何点取れる？">
-<meta name="twitter:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png">
+<meta name="twitter:image" content="https://8bit-mini-games.github.io/onigiri-catch/og.png?v=20261029">
 <meta name="twitter:image:alt" content="おにぎりキャッチ。ねこ、くま、うさぎを選んで遊ぶ45秒のミニゲーム。">
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 <style>
@@ -68,12 +69,14 @@ button {font-size:17px;line-height:1.5;}
  .chs{gap:6px}.ch{min-width:0}button.ch{padding:3px 5px;font-size:14px}button.ch canvas{width:49px;height:52px}
  .ov button:not(.ch){padding:7px 15px;font-size:15px}
 }
+.privacy-note{margin:0;text-align:center;font-size:12px;line-height:1.6;color:var(--muted)}
 </style></head><body><main class="game">
 <div class="top"><h1>おにぎりキャッチ</h1><div class="tools"><button class="mini" id="pause" type="button" aria-label="一時停止" hidden>Ⅱ</button><button class="mini" id="mu" type="button" aria-label="音楽・効果音をオフにする" aria-pressed="true">🔊</button></div></div>
 <div class="scoreboard"><div class="stat"><span class="caption">得点</span><span class="value" id="sc"><span class="num">0</span><small>点</small></span></div><div class="stat"><span class="caption">残り</span><span class="value" id="tm" aria-label="残り45秒"><span class="num">45</span><small>秒</small></span></div><div class="stat"><span class="caption">ベスト</span><span class="value" id="bs"><span class="num">0</span></span></div></div>
 <div class="status-row"><span class="hearts" id="lf" aria-label="ライフ3、最大5"></span></div>
 <div class="stage"><canvas id="c" tabindex="0" aria-label="おにぎりキャッチ。指で左右にドラッグ、または左右の矢印キーで移動"></canvas><div class="fx" id="fx" aria-hidden="true"></div><div class="tracked feedback-hud" id="feedback" hidden aria-hidden="true"></div><div class="tracked power-hud" id="powerHud" hidden aria-hidden="true"><span id="powerText">★ 5秒</span><div class="power-bar"><span id="powerFill"></span></div></div>
 <div class="ov" id="ov"><p id="msg">空からごちそうが降ってくる！<br>キャラをえらんで遊ぼう。</p><p class="small" id="sub">45秒で何点取れるかな？<br>★は2個。取ると5秒間無敵！</p><div class="chs" id="chs"></div><button id="go" type="button">あそぶ</button><button class="secondary" id="again" type="button" hidden>最初からやり直す</button><button class="secondary" id="shareX" type="button" hidden>Xで共有する</button></div></div>
+<p class="privacy-note">登録不要・ダウンロード不要<br>名前・メールアドレスの入力も不要です</p>
 <section class="rules" id="rules" aria-label="あそび方"><strong>あそび方</strong><p>左右にドラッグ／← →で移動。<br>おにぎり1点・だんご2点・★5点。<br>キノコ・爆弾はよけて、♥で回復。<br>★で5秒無敵！はじけば各＋2点。<br>連続キャッチで得点アップ！</p></section></main>
 <script>
 'use strict';
